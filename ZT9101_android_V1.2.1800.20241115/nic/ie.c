@@ -382,7 +382,7 @@ zt_s32 zt_ie_ht_capability_update(nic_info_st *nic_info,
     {
         wdn_info->htpriv.both_20m_40m = hw_info->cbw40_support;
         /*sta support both 20M and 40Mhz so set 40M band width*/
-        zt_ie_ht_operation_info_update(nic_info, wdn_info, &pcur_network->pht_oper, sizeof(zt_80211_mgmt_ht_operation_t));
+        zt_ie_ht_operation_info_update(nic_info, wdn_info, (zt_u8 *)&pcur_network->pht_oper, sizeof(zt_80211_mgmt_ht_operation_t));
     }
     else
     {
