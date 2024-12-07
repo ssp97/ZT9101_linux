@@ -38,7 +38,7 @@
   CONFIG_RX_SOFT_AGG        = n
   CONFIG_WIFI_MODE          = all
   CONFIG_WIFI_FRAMEWORK     = nl80211
-  CONFIG_HIF_PORT           = both
+  CONFIG_HIF_PORT           = usb
   CONFIG_CLOCK_24MHZ        = n
   CONFIG_ZT9101XV20_SUPPORT = y
   CONFIG_ZT9101XV30_SUPPORT = y
