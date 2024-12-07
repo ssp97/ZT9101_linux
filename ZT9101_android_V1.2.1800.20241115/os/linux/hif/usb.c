@@ -247,6 +247,7 @@ static inline zt_u32 zt_usb_ffaddr2pipe(hif_usb_mngt *usb, zt_u32 addr)
 
 }
 
+zt_bool zt_free_tx_need_wake(hif_node_st *hif_node);
 static inline void usb_write_port_complete(struct urb *purb)
 {
     zt_s32 ret                         = 0;
