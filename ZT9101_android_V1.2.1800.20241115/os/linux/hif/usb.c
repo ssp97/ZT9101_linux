@@ -1064,7 +1064,11 @@ static zt_s32 zt_usb_resume(struct usb_interface *pusb_intf)
     return 0;
 }
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 11, 0))
+static void zt_usb_shutdown(struct usb_interface *intf)
+#else
 static void zt_usb_shutdown(struct device *dev)
+#endif
 {
 }
 
@@ -1105,7 +1109,11 @@ static struct usb_driver zt_usb_driver =
     .suspend        =   NULL,//zt_usb_suspend,
     .resume         =   NULL,//zt_usb_resume,
     .reset_resume   =   NULL,//zt_usb_resume,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 11, 0))
+    .shutdown       =   zt_usb_shutdown,
+#else
     .drvwrap.driver.shutdown    = zt_usb_shutdown,
+#endif
     .supports_autosuspend       = 1,
 };
 
