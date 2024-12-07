@@ -3738,7 +3738,12 @@ static zt_s32 cfg80211_start_ap(struct wiphy *wiphy, struct net_device *ndev,
 
 static zt_s32 cfg80211_change_beacon(struct wiphy *wiphy,
                                      struct net_device *ndev,
-                                     struct cfg80211_beacon_data *info)
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 7, 0))
+                                     struct cfg80211_ap_update *info
+#else
+				     struct cfg80211_beacon_data *info
+#endif
+)
 {
     zt_s32 ret = 0;
     ndev_priv_st *pndev_priv = netdev_priv(ndev);
@@ -3747,8 +3752,15 @@ static zt_s32 cfg80211_change_beacon(struct wiphy *wiphy,
     CFG80211_DBG("mac addr: "ZT_MAC_FMT, ZT_MAC_ARG(nic_to_local_addr(pnic_info)));
 
     ret =
-        add_beacon(pnic_info, info->head, info->head_len, info->tail,
-                   info->tail_len);
+        add_beacon(pnic_info, 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 7, 0))
+		   info->beacon.head, info->beacon.head_len, info->beacon.tail,
+                   info->beacon.tail_len
+#else
+		   info->head, info->head_len, info->tail,
+                   info->tail_len
+#endif
+	);
     return ret;
 }
 
