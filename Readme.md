@@ -1,3 +1,12 @@
 ### ZTop ZT9101 vendor wireless driver
 
-This driver has been adopted for Linux kernel version 6.12, but it has not been tested yet.
+Only passed the kernel 5.15.93-sunxi test
+
+### build
+
+```
+cd src
+make clean
+make -j$(nporc)
+insmod zt9101_ztopmac.ko
+```
